@@ -1,18 +1,15 @@
 import bcrypt from 'bcrypt';
-import jwt from 'jsonwebtoken';
 
 import { AppError } from '../common/AppError';
-import { env } from '../config/env';
 import { AUTH_MESSAGES } from '../constants/apiMessages';
 import { HTTP_STATUS } from '../constants/statusCodes';
-import { IUser } from '../models/User.model';
 import { AuthRepository } from '../repositories/AuthRepository';
 import { LoginDto, RegisterDto } from '../validations/auth.validation';
 
 export class AuthService {
   constructor(private readonly authRepository: AuthRepository) {}
 
-  async register(userData: RegisterDto): Promise<IUser> {
+  async register(userData: RegisterDto) {
     const existingUser = await this.authRepository.findByEmail(
       userData.email
     );
@@ -34,7 +31,7 @@ export class AuthService {
     return user;
   }
 
-  async login(loginData: LoginDto): Promise<string> {
+  async login(loginData: LoginDto) {
     const user = await this.authRepository.findByEmail(
       loginData.email
     );
@@ -58,17 +55,6 @@ export class AuthService {
       );
     }
 
-    const token = jwt.sign(
-      {
-        id: user._id,
-        email: user.email,
-      },
-      env.JWT_SECRET,
-      {
-        expiresIn: env.JWT_EXPIRES_IN,
-      }
-    );
-
-    return token;
+    return user;
   }
 }
