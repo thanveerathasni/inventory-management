@@ -1,10 +1,16 @@
-import bcrypt from 'bcrypt';
-
 import { AppError } from '../common/AppError';
 import { AUTH_MESSAGES } from '../constants/apiMessages';
 import { HTTP_STATUS } from '../constants/statusCodes';
 import { AuthRepository } from '../repositories/AuthRepository';
-import { LoginDto, RegisterDto } from '../validations/auth.validation';
+import { comparePassword, hashPassword } from '../utils/hash';
+import {
+  generateAccessToken,
+  generateRefreshToken,
+} from '../utils/jwt';
+import {
+  LoginDto,
+  RegisterDto,
+} from '../validations/auth.validation';
 
 export class AuthService {
   constructor(private readonly authRepository: AuthRepository) {}
@@ -21,7 +27,7 @@ export class AuthService {
       );
     }
 
-    const hashedPassword = await bcrypt.hash(userData.password, 10);
+    const hashedPassword = await hashPassword(userData.password);
 
     const user = await this.authRepository.create({
       ...userData,
@@ -43,7 +49,7 @@ export class AuthService {
       );
     }
 
-    const isPasswordValid = await bcrypt.compare(
+    const isPasswordValid = await comparePassword(
       loginData.password,
       user.password
     );
@@ -55,6 +61,23 @@ export class AuthService {
       );
     }
 
-    return user;
+    const payload = {
+      id: user._id.toString(),
+      email: user.email,
+    };
+
+    const accessToken = generateAccessToken(payload);
+    const refreshToken = generateRefreshToken(payload);
+
+    await this.authRepository.updateRefreshToken(
+      user._id.toString(),
+      refreshToken
+    );
+
+    return {
+      user,
+      accessToken,
+      refreshToken,
+    };
   }
 }

@@ -23,17 +23,25 @@ export class AuthController {
     }
   );
 
-  login = asyncHandler(
-    async (req: Request, res: Response, _next: NextFunction) => {
-      const user = await this.authService.login(req.body);
+login = asyncHandler(async (req, res) => {
+  const result = await this.authService.login(req.body);
 
-      res.status(HTTP_STATUS.OK).json(
-        new ApiResponse(
-          true,
-          AUTH_MESSAGES.LOGIN_SUCCESS,
-          user
-        )
-      );
-    }
+  res.cookie('refreshToken', result.refreshToken, {
+    httpOnly: true,
+    secure: false,
+    sameSite: 'strict',
+    maxAge: 7 * 24 * 60 * 60 * 1000,
+  });
+
+  res.status(HTTP_STATUS.OK).json(
+    new ApiResponse(
+      true,
+      AUTH_MESSAGES.LOGIN_SUCCESS,
+      {
+        user: result.user,
+        accessToken: result.accessToken,
+      }
+    )
   );
+});
 }
