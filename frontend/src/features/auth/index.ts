@@ -4,6 +4,7 @@ export {
   initializeAuth,
   loginUser,
   logoutUser,
+  registerUser,
 } from "./auth.slice";
 export {
   selectAccessToken,
@@ -14,9 +15,16 @@ export {
   selectIsAuthLoading,
   selectIsSessionRestoring,
 } from "./auth.selectors";
-export { loginSchema, type LoginSchema } from "./auth.validation";
+export {
+  loginSchema,
+  registerSchema,
+  type LoginSchema,
+  type RegisterSchema,
+} from "./auth.validation";
 export type {
   AuthState,
   LoginCredentials,
   LoginFormValues,
+  RegisterCredentials,
+  RegisterFormValues,
 } from "./auth.types";

@@ -8,6 +8,12 @@ export interface LoginRequest {
   readonly password: string;
 }
 
+export interface RegisterRequest {
+  readonly email: string;
+  readonly name: string;
+  readonly password: string;
+}
+
 export interface AuthenticatedUser {
   readonly _id: string;
   readonly email: string;
@@ -33,6 +39,17 @@ export const login = async (
 export const logout = async (): Promise<ApiResponse<undefined>> => {
   const response = await apiClient.post<ApiResponse<undefined>>(
     API_ENDPOINTS.AUTH.LOGOUT,
+  );
+
+  return response.data;
+};
+
+export const register = async (
+  payload: RegisterRequest,
+): Promise<ApiResponse<AuthenticatedUser>> => {
+  const response = await apiClient.post<ApiResponse<AuthenticatedUser>>(
+    API_ENDPOINTS.AUTH.REGISTER,
+    payload,
   );
 
   return response.data;

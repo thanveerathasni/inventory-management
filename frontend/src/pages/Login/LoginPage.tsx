@@ -1,7 +1,7 @@
 import { useDispatch, useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
-import { PROTECTED_ROUTES } from "../../constants/routes";
+import { PROTECTED_ROUTES, PUBLIC_ROUTES } from "../../constants/routes";
 import {
   loginUser,
   selectIsAuthLoading,
@@ -39,6 +39,15 @@ export const LoginPage = () => {
           </p>
         </div>
         <LoginForm isLoading={isLoading} onSubmit={handleLogin} />
+        <p className="mt-6 text-center text-sm text-slate-600">
+          Don't have an account?{" "}
+          <Link
+            className="font-semibold text-indigo-600 hover:text-indigo-500"
+            to={PUBLIC_ROUTES.REGISTER}
+          >
+            Sign up
+          </Link>
+        </p>
       </section>
     </main>
   );

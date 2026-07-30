@@ -1,5 +1,5 @@
 import { AlertTriangle } from "lucide-react";
-import { Component, type ErrorInfo, type ReactNode } from "react";
+import { Component, type ReactNode } from "react";
 
 import { Button } from "./ui";
 
@@ -25,8 +25,8 @@ export class ErrorBoundary extends Component<
     return { error, hasError: true };
   }
 
-  public componentDidCatch(_error: Error, _errorInfo: ErrorInfo): void {
-    // In a real app we'd log this to an error reporting service
+  public componentDidCatch(): void {
+    
   }
 
   public render(): ReactNode {

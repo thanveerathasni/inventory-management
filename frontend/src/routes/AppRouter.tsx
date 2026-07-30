@@ -13,6 +13,7 @@ import { PageLoader } from "../components/ui";
 import { useAuth } from "../hooks";
 import { DashboardLayout } from "../layouts";
 import { LoginPage } from "../pages/Login";
+import { RegisterPage } from "../pages/Register";
 import { NotFoundPage } from "../pages/NotFoundPage";
 import type { AppDispatch } from "../store/store";
 
@@ -39,7 +40,7 @@ export const AppRouter = () => {
           path={PUBLIC_ROUTES.HOME}
         />
         <Route element={<LoginPage />} path={PUBLIC_ROUTES.LOGIN} />
-        <Route element={null} path={PUBLIC_ROUTES.REGISTER} />
+        <Route element={<RegisterPage />} path={PUBLIC_ROUTES.REGISTER} />
       </Route>
 
       <Route element={<ProtectedRoute />}>

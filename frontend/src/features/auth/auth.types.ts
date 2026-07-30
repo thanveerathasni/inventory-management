@@ -1,7 +1,12 @@
-import type { AuthenticatedUser, LoginRequest } from "../../services/api";
+import type { AuthenticatedUser, LoginRequest, RegisterRequest } from "../../services/api";
 
 export type LoginCredentials = LoginRequest;
 export type LoginFormValues = LoginRequest;
+export type RegisterCredentials = RegisterRequest;
+export type RegisterFormValues = RegisterSchema; 
+
+// We need to import RegisterSchema but avoid circular dependency or just type it as the z.infer
+import type { RegisterSchema } from "./auth.validation";
 
 export interface AuthState {
   readonly accessToken: string | null;
