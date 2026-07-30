@@ -1,4 +1,4 @@
-import { FilterQuery, Model, QueryOptions, UpdateQuery } from 'mongoose';
+import { Model, QueryOptions, UpdateQuery } from 'mongoose';
 
 export abstract class BaseRepository<T> {
   constructor(protected readonly model: Model<T>) {}
@@ -11,11 +11,11 @@ export abstract class BaseRepository<T> {
     return this.model.findById(id);
   }
 
-  async findOne(filter: FilterQuery<T>) {
+  async findOne(filter: Record<string, unknown>) {
     return this.model.findOne(filter);
   }
 
-  async findAll(filter: FilterQuery<T> = {}) {
+  async findAll(filter: Record<string, unknown> = {}) {
     return this.model.find(filter);
   }
 
