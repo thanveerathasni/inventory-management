@@ -1,3 +1,5 @@
+import { Home, Package } from "lucide-react";
+
 import { NavigationItem } from "../components/layout";
 import { PROTECTED_ROUTES } from "../constants/routes";
 
@@ -7,8 +9,8 @@ interface DashboardSidebarProps {
 }
 
 const NAVIGATION_ITEMS = [
-  { label: "Dashboard", to: PROTECTED_ROUTES.DASHBOARD },
-  { label: "Products", to: PROTECTED_ROUTES.PRODUCTS },
+  { icon: <Home className="h-5 w-5" />, label: "Dashboard", to: PROTECTED_ROUTES.DASHBOARD },
+  { icon: <Package className="h-5 w-5" />, label: "Products", to: PROTECTED_ROUTES.PRODUCTS },
 ] as const;
 
 export const DashboardSidebar = ({
@@ -35,7 +37,7 @@ export const DashboardSidebar = ({
         className="flex flex-1 flex-col gap-2 pt-16 lg:pt-0"
       >
         {NAVIGATION_ITEMS.map((item) => (
-          <NavigationItem key={item.to} label={item.label} to={item.to} />
+          <NavigationItem icon={item.icon} key={item.to} label={item.label} to={item.to} />
         ))}
       </nav>
 

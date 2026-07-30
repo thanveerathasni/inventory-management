@@ -15,8 +15,8 @@ export const ProductTable = ({
   onDelete,
   products,
 }: ProductTableProps) => (
-  <div className="overflow-x-auto rounded-lg border border-slate-200 bg-white">
-    <table className="min-w-full text-left text-sm">
+  <div className="overflow-x-auto rounded-xl border border-slate-200 bg-white shadow-sm">
+    <table className="min-w-full text-left text-sm whitespace-nowrap">
       <thead className="bg-slate-100 text-slate-700">
         <tr>
           {[
@@ -33,7 +33,7 @@ export const ProductTable = ({
           ))}
         </tr>
       </thead>
-      <tbody>
+      <tbody className="divide-y divide-slate-200 bg-white">
         {products.map((product) => (
           <ProductTableRow
             isDeleting={deletingProductId === product._id}

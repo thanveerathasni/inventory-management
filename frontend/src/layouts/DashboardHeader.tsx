@@ -1,3 +1,5 @@
+import { Menu } from "lucide-react";
+
 import { Logo, UserMenu } from "../components/layout";
 
 interface DashboardHeaderProps {
@@ -13,7 +15,7 @@ export const DashboardHeader = ({ onMenuToggle }: DashboardHeaderProps) => (
         onClick={onMenuToggle}
         type="button"
       >
-        Menu
+        <Menu className="h-5 w-5" />
       </button>
       <Logo />
     </div>

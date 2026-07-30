@@ -2,14 +2,14 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 
 import { loginSchema, type LoginFormValues } from "../../features/auth";
+import { Button, Input } from "../../components/ui";
 
 interface LoginFormProps {
-  readonly error: string | null;
   readonly isLoading: boolean;
   readonly onSubmit: (values: LoginFormValues) => void;
 }
 
-export const LoginForm = ({ error, isLoading, onSubmit }: LoginFormProps) => {
+export const LoginForm = ({ isLoading, onSubmit }: LoginFormProps) => {
   const {
     formState: { errors },
     register,
@@ -19,40 +19,40 @@ export const LoginForm = ({ error, isLoading, onSubmit }: LoginFormProps) => {
   });
 
   return (
-    <form className="login-form" onSubmit={handleSubmit(onSubmit)} noValidate>
-      <label className="login-form__field" htmlFor="email">
-        Email
-        <input
+    <form className="space-y-6" noValidate onSubmit={handleSubmit(onSubmit)}>
+      <div>
+        <label className="mb-2 block text-sm font-medium text-slate-700" htmlFor="email">
+          Email address
+        </label>
+        <Input
           autoComplete="email"
+          error={errors.email?.message ?? ""}
           id="email"
           type="email"
           {...register("email")}
         />
-        {errors.email?.message === undefined ? null : (
-          <span className="login-form__validation">{errors.email.message}</span>
-        )}
-      </label>
+      </div>
 
-      <label className="login-form__field" htmlFor="password">
-        Password
-        <input
+      <div>
+        <label className="mb-2 block text-sm font-medium text-slate-700" htmlFor="password">
+          Password
+        </label>
+        <Input
           autoComplete="current-password"
+          error={errors.password?.message ?? ""}
           id="password"
           type="password"
           {...register("password")}
         />
-        {errors.password?.message === undefined ? null : (
-          <span className="login-form__validation">
-            {errors.password.message}
-          </span>
-        )}
-      </label>
+      </div>
 
-      {error === null ? null : <p role="alert">{error}</p>}
-
-      <button disabled={isLoading} type="submit">
-        {isLoading ? "Signing in…" : "Sign in"}
-      </button>
+      <Button
+        className="w-full"
+        isLoading={isLoading}
+        type="submit"
+      >
+        Sign in
+      </Button>
     </form>
   );
 };

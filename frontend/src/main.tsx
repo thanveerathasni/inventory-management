@@ -3,6 +3,9 @@ import { createRoot } from "react-dom/client";
 import { Provider } from "react-redux";
 import { BrowserRouter } from "react-router-dom";
 
+import { Toaster } from "react-hot-toast";
+
+import { ErrorBoundary } from "./components/ErrorBoundary";
 import { AppRouter } from "./routes";
 import { store } from "./store/store";
 import "./styles/index.css";
@@ -16,9 +19,18 @@ if (rootElement === null) {
 createRoot(rootElement).render(
   <StrictMode>
     <Provider store={store}>
-      <BrowserRouter>
-        <AppRouter />
-      </BrowserRouter>
+      <ErrorBoundary>
+        <BrowserRouter>
+          <Toaster
+            position="top-right"
+            toastOptions={{
+              className: "text-sm",
+              duration: 4000,
+            }}
+          />
+          <AppRouter />
+        </BrowserRouter>
+      </ErrorBoundary>
     </Provider>
   </StrictMode>,
 );

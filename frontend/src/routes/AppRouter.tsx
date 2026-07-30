@@ -9,9 +9,11 @@ import {
   EditProductPage,
   ProductListPage,
 } from "../features/products";
+import { PageLoader } from "../components/ui";
 import { useAuth } from "../hooks";
 import { DashboardLayout } from "../layouts";
 import { LoginPage } from "../pages/Login";
+import { NotFoundPage } from "../pages/NotFoundPage";
 import type { AppDispatch } from "../store/store";
 
 import { ProtectedRoute } from "./ProtectedRoute";
@@ -26,7 +28,7 @@ export const AppRouter = () => {
   }, [dispatch]);
 
   if (isSessionRestoring) {
-    return <p role="status">Restoring session…</p>;
+    return <PageLoader message="Restoring session…" />;
   }
 
   return (
@@ -57,6 +59,8 @@ export const AppRouter = () => {
           />
         </Route>
       </Route>
+
+      <Route element={<NotFoundPage />} path="*" />
     </Routes>
   );
 };
