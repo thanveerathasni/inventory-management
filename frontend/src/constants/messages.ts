@@ -4,6 +4,8 @@ export const ERROR_MESSAGES = {
 
 export const PRODUCT_MESSAGES = {
   CREATED: "Product created successfully.",
+  NOT_FOUND: "Product not found.",
+  UPDATED: "Product updated successfully.",
 } as const;
 
 export const VALIDATION_MESSAGES = {

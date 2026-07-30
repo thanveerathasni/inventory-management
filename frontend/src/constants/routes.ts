@@ -6,6 +6,8 @@ export const PUBLIC_ROUTES = {
 
 export const PROTECTED_ROUTES = {
   PRODUCT_CREATE: "/products/create",
+  PRODUCT_EDIT: "/products/:productId/edit",
+  productEdit: (productId: string) => `/products/${productId}/edit`,
   DASHBOARD: "/dashboard",
   PRODUCTS: "/products",
 } as const;

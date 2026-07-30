@@ -20,6 +20,8 @@ export interface CreateProductRequest {
   readonly quantity: number;
 }
 
+export type UpdateProductRequest = CreateProductRequest;
+
 export const getProducts = async (): Promise<
   ApiResponse<readonly Product[]>
 > => {
@@ -35,6 +37,18 @@ export const createProduct = async (
 ): Promise<ApiResponse<Product>> => {
   const response = await apiClient.post<ApiResponse<Product>>(
     API_ENDPOINTS.PRODUCTS.BASE,
+    payload,
+  );
+
+  return response.data;
+};
+
+export const updateProduct = async (
+  productId: string,
+  payload: UpdateProductRequest,
+): Promise<ApiResponse<Product>> => {
+  const response = await apiClient.put<ApiResponse<Product>>(
+    API_ENDPOINTS.PRODUCTS.BY_ID(productId),
     payload,
   );
 

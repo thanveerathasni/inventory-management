@@ -11,5 +11,6 @@ export const API_ENDPOINTS = {
   },
   PRODUCTS: {
     BASE: PRODUCT_BASE_PATH,
+    BY_ID: (productId: string) => `${PRODUCT_BASE_PATH}/${productId}`,
   },
 } as const;

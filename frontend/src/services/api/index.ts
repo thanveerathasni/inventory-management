@@ -10,6 +10,8 @@ export type { ApiResponse } from "./api.types";
 export {
   createProduct,
   getProducts,
+  updateProduct,
   type CreateProductRequest,
   type Product,
+  type UpdateProductRequest,
 } from "./product.api";

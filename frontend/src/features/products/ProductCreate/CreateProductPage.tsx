@@ -9,6 +9,7 @@ import type { ProductListRouteState } from "../product.types";
 
 import { CreateProductForm } from "./CreateProductForm";
 import {
+  CREATE_PRODUCT_DEFAULT_VALUES,
   CREATE_PRODUCT_TEXT,
   type CreateProductFormValues,
 } from "./CreateProduct.types";
@@ -56,8 +57,11 @@ export const CreateProductPage = () => {
       </h1>
       <CreateProductForm
         error={error}
+        initialValues={CREATE_PRODUCT_DEFAULT_VALUES}
         isSubmitting={isSubmitting}
         onSubmit={handleCreateProduct}
+        submitLabel={CREATE_PRODUCT_TEXT.CREATE}
+        submittingLabel={CREATE_PRODUCT_TEXT.CREATING}
       />
     </section>
   );

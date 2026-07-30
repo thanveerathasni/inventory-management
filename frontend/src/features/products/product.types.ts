@@ -37,6 +37,7 @@ export const PRODUCT_LIST_TEXT = {
   CATEGORY: "Category",
   EMPTY_DESCRIPTION: "Add products to begin managing your inventory.",
   EMPTY_TITLE: "No products yet",
+  EDIT: "Edit",
   ERROR_TITLE: "Unable to load products",
   LOAD_ERROR: "Products could not be loaded. Please try again.",
   NAME: "Name",

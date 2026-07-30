@@ -2,7 +2,6 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 
 import {
-  CREATE_PRODUCT_DEFAULT_VALUES,
   CREATE_PRODUCT_TEXT,
   type CreateProductFormValues,
 } from "./CreateProduct.types";
@@ -10,14 +9,20 @@ import { createProductSchema } from "./CreateProduct.validation";
 
 interface CreateProductFormProps {
   readonly error: string | null;
+  readonly initialValues: CreateProductFormValues;
   readonly isSubmitting: boolean;
   readonly onSubmit: (values: CreateProductFormValues) => Promise<boolean>;
+  readonly submitLabel: string;
+  readonly submittingLabel: string;
 }
 
 export const CreateProductForm = ({
   error,
+  initialValues,
   isSubmitting,
   onSubmit,
+  submitLabel,
+  submittingLabel,
 }: CreateProductFormProps) => {
   const {
     formState: { errors },
@@ -25,7 +30,7 @@ export const CreateProductForm = ({
     register,
     reset,
   } = useForm<CreateProductFormValues>({
-    defaultValues: CREATE_PRODUCT_DEFAULT_VALUES,
+    defaultValues: initialValues,
     resolver: zodResolver(createProductSchema),
   });
 
@@ -35,7 +40,7 @@ export const CreateProductForm = ({
     const isCreated = await onSubmit(values);
 
     if (isCreated) {
-      reset(CREATE_PRODUCT_DEFAULT_VALUES);
+      reset(initialValues);
     }
   };
 
@@ -123,9 +128,7 @@ export const CreateProductForm = ({
         disabled={isSubmitting}
         type="submit"
       >
-        {isSubmitting
-          ? CREATE_PRODUCT_TEXT.CREATING
-          : CREATE_PRODUCT_TEXT.CREATE}
+        {isSubmitting ? submittingLabel : submitLabel}
       </button>
     </form>
   );

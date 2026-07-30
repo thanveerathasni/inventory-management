@@ -14,6 +14,16 @@ export {
   type CreateProductSchema,
 } from "./ProductCreate";
 export {
+  EditProductForm,
+  EditProductPage,
+  editProductSchema,
+  findProductById,
+  toEditProductFormValues,
+  toUpdateProductRequest,
+  type EditProductFormValues,
+  type EditProductSchema,
+} from "./ProductUpdate";
+export {
   selectProductListError,
   selectProductListProducts,
   selectProductListStatus,
