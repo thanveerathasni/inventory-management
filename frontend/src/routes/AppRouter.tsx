@@ -5,6 +5,7 @@ import { Navigate, Route, Routes } from "react-router-dom";
 import { PROTECTED_ROUTES, PUBLIC_ROUTES } from "../constants/routes";
 import { initializeAuth } from "../features/auth";
 import { useAuth } from "../hooks";
+import { DashboardLayout } from "../layouts";
 import { LoginPage } from "../pages/Login";
 import type { AppDispatch } from "../store/store";
 
@@ -35,7 +36,10 @@ export const AppRouter = () => {
       </Route>
 
       <Route element={<ProtectedRoute />}>
-        <Route element={null} path={PROTECTED_ROUTES.DASHBOARD} />
+        <Route element={<DashboardLayout />}>
+          <Route element={null} path={PROTECTED_ROUTES.DASHBOARD} />
+          <Route element={null} path={PROTECTED_ROUTES.PRODUCTS} />
+        </Route>
       </Route>
     </Routes>
   );
