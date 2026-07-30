@@ -3,10 +3,9 @@ import { NextFunction, Request, Response } from 'express';
 import { AppError } from '../common/AppError';
 import { AUTH_MESSAGES } from '../constants/apiMessages';
 import { HTTP_STATUS } from '../constants/statusCodes';
-import { User } from '../models/User.model';
 import { verifyAccessToken } from '../utils/jwt';
 
-export const protect = async (
+export const protect = (
   req: Request,
   _res: Response,
   next: NextFunction
@@ -25,16 +24,10 @@ export const protect = async (
 
     const payload = verifyAccessToken(token);
 
-    const user = await User.findById(payload.id).select('-password -refreshToken');
-
-    if (!user) {
-      throw new AppError(
-        AUTH_MESSAGES.USER_NOT_FOUND,
-        HTTP_STATUS.NOT_FOUND
-      );
-    }
-
-    req.user = user;
+    req.user = {
+      id: payload.id,
+      email: payload.email,
+    };
 
     next();
   } catch (error) {
