@@ -6,6 +6,7 @@ import { comparePassword, hashPassword } from '../utils/hash';
 import {
   generateAccessToken,
   generateRefreshToken,
+  verifyRefreshToken    
 } from '../utils/jwt';
 import {
   LoginDto,
@@ -80,4 +81,45 @@ export class AuthService {
       refreshToken,
     };
   }
+
+
+  async refreshToken(refreshToken: string) {
+  if (!refreshToken) {
+    throw new AppError(
+      AUTH_MESSAGES.INVALID_REFRESH_TOKEN,
+      HTTP_STATUS.UNAUTHORIZED
+    );
+  }
+
+  const payload = verifyRefreshToken(refreshToken);
+
+  const user = await this.authRepository.findById(payload.id);
+
+  if (!user) {
+    throw new AppError(
+      AUTH_MESSAGES.INVALID_REFRESH_TOKEN,
+      HTTP_STATUS.UNAUTHORIZED
+    );
+  }
+
+  if (user.refreshToken !== refreshToken) {
+    throw new AppError(
+      AUTH_MESSAGES.INVALID_REFRESH_TOKEN,
+      HTTP_STATUS.UNAUTHORIZED
+    );
+  }
+
+  const newAccessToken = generateAccessToken({
+    id: user._id.toString(),
+    email: user.email,
+  });
+
+  return {
+    accessToken: newAccessToken,
+  };
+}
+
+async logout(userId: string) {
+  await this.authRepository.clearRefreshToken(userId);
+}
 }

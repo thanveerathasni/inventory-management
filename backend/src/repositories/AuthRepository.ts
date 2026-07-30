@@ -13,18 +13,19 @@ export class AuthRepository extends BaseRepository<IUser> {
   async existsByEmail(email: string): Promise<boolean> {
     return (await this.findByEmail(email)) !== null;
   }
-  async updateRefreshToken(
-  userId: string,
-  refreshToken: string
-) {
-  return this.updateById(userId, {
-    refreshToken,
-  });
+async updateRefreshToken(userId: string, refreshToken: string) {
+  return this.model.findByIdAndUpdate(
+    userId,
+    { refreshToken },
+    { new: true }
+  );
 }
 
 async clearRefreshToken(userId: string) {
-  return this.updateById(userId, {
-    refreshToken: null,
-  });
+  return this.model.findByIdAndUpdate(
+    userId,
+    { refreshToken: null },
+    { new: true }
+  );
 }
 }

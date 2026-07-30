@@ -7,6 +7,10 @@ export const AUTH_MESSAGES = {
   USER_NOT_FOUND: 'User not found.',
 
   UNAUTHORIZED: 'Unauthorized access.',
+  INVALID_TOKEN: 'Invalid or expired access token',
+INVALID_REFRESH_TOKEN: 'Invalid or expired refresh token',
+TOKEN_REFRESHED: 'Access token refreshed successfully',
+LOGOUT_SUCCESS: 'Logged out successfully',
 } as const;
 
 export const PRODUCT_MESSAGES = {
