@@ -1,4 +1,4 @@
-const API_BASE_PATH = '/api';
+const API_BASE_PATH = "/api";
 const AUTH_BASE_PATH = `${API_BASE_PATH}/auth`;
 
 export const API_ENDPOINTS = {

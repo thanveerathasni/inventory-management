@@ -1,7 +1,7 @@
-import { zodResolver } from '@hookform/resolvers/zod';
-import { useForm } from 'react-hook-form';
+import { zodResolver } from "@hookform/resolvers/zod";
+import { useForm } from "react-hook-form";
 
-import { loginSchema, type LoginFormValues } from '../../features/auth';
+import { loginSchema, type LoginFormValues } from "../../features/auth";
 
 interface LoginFormProps {
   readonly error: string | null;
@@ -26,7 +26,7 @@ export const LoginForm = ({ error, isLoading, onSubmit }: LoginFormProps) => {
           autoComplete="email"
           id="email"
           type="email"
-          {...register('email')}
+          {...register("email")}
         />
         {errors.email?.message === undefined ? null : (
           <span className="login-form__validation">{errors.email.message}</span>
@@ -39,7 +39,7 @@ export const LoginForm = ({ error, isLoading, onSubmit }: LoginFormProps) => {
           autoComplete="current-password"
           id="password"
           type="password"
-          {...register('password')}
+          {...register("password")}
         />
         {errors.password?.message === undefined ? null : (
           <span className="login-form__validation">
@@ -51,7 +51,7 @@ export const LoginForm = ({ error, isLoading, onSubmit }: LoginFormProps) => {
       {error === null ? null : <p role="alert">{error}</p>}
 
       <button disabled={isLoading} type="submit">
-        {isLoading ? 'Signing in…' : 'Sign in'}
+        {isLoading ? "Signing in…" : "Sign in"}
       </button>
     </form>
   );

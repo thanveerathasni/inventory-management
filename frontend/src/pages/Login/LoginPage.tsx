@@ -1,17 +1,17 @@
-import { useDispatch, useSelector } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
+import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 
-import { PROTECTED_ROUTES } from '../../constants/routes';
+import { PROTECTED_ROUTES } from "../../constants/routes";
 import {
   loginUser,
   selectAuthError,
   selectIsAuthLoading,
   type LoginFormValues,
-} from '../../features/auth';
-import type { AppDispatch } from '../../store/store';
+} from "../../features/auth";
+import type { AppDispatch } from "../../store/store";
 
-import { LoginForm } from './LoginForm';
-import styles from './LoginPage.module.css';
+import { LoginForm } from "./LoginForm";
+import styles from "./LoginPage.module.css";
 
 export const LoginPage = () => {
   const dispatch = useDispatch<AppDispatch>();

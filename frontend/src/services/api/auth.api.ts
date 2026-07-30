@@ -1,7 +1,7 @@
-import { API_ENDPOINTS } from '../../constants/api';
+import { API_ENDPOINTS } from "../../constants/api";
 
-import { apiClient } from './axios';
-import type { ApiResponse } from './api.types';
+import { apiClient } from "./axios";
+import type { ApiResponse } from "./api.types";
 
 export interface LoginRequest {
   readonly email: string;

@@ -3,7 +3,7 @@ import type {
   AxiosInstance,
   AxiosResponse,
   InternalAxiosRequestConfig,
-} from 'axios';
+} from "axios";
 
 export const configureApiInterceptors = (client: AxiosInstance): void => {
   client.interceptors.request.use(

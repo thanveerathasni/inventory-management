@@ -1,8 +1,9 @@
 export const PUBLIC_ROUTES = {
-  HOME: '/',
-  LOGIN: '/login',
+  HOME: "/",
+  LOGIN: "/login",
+  REGISTER: "/register",
 } as const;
 
 export const PROTECTED_ROUTES = {
-  DASHBOARD: '/dashboard',
+  DASHBOARD: "/dashboard",
 } as const;

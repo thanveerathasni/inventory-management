@@ -1,15 +1,16 @@
-import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
+import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 
-import { login, logout, type LoginResponse } from '../../services/api';
+import { login, logout, type LoginResponse } from "../../services/api";
 
-import type { AuthState, LoginCredentials } from './auth.types';
-import { getApiErrorMessage } from './auth.utils';
+import type { AuthState, LoginCredentials } from "./auth.types";
+import { getApiErrorMessage } from "./auth.utils";
 
 const createInitialState = (): AuthState => ({
   accessToken: null,
   error: null,
   isAuthenticated: false,
   isLoading: false,
+  isSessionRestoring: true,
   user: null,
 });
 
@@ -17,7 +18,7 @@ export const loginUser = createAsyncThunk<
   LoginResponse,
   LoginCredentials,
   { rejectValue: string }
->('auth/login', async (credentials, { rejectWithValue }) => {
+>("auth/login", async (credentials, { rejectWithValue }) => {
   try {
     const response = await login(credentials);
 
@@ -32,7 +33,7 @@ export const loginUser = createAsyncThunk<
 });
 
 export const logoutUser = createAsyncThunk<void, void, { rejectValue: string }>(
-  'auth/logout',
+  "auth/logout",
   async (_, { rejectWithValue }) => {
     try {
       const response = await logout();
@@ -47,10 +48,14 @@ export const logoutUser = createAsyncThunk<void, void, { rejectValue: string }>(
 );
 
 const authSlice = createSlice({
-  name: 'auth',
+  name: "auth",
   initialState: createInitialState(),
   reducers: {
     clearAuth: () => createInitialState(),
+    initializeAuth: (state) => {
+      state.isAuthenticated = state.accessToken !== null;
+      state.isSessionRestoring = false;
+    },
   },
   extraReducers: (builder) => {
     builder
@@ -73,5 +78,5 @@ const authSlice = createSlice({
   },
 });
 
-export const { clearAuth } = authSlice.actions;
+export const { clearAuth, initializeAuth } = authSlice.actions;
 export const authReducer = authSlice.reducer;

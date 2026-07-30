@@ -1,4 +1,4 @@
-import type { RootState } from '../../store/store';
+import type { RootState } from "../../store/store";
 
 export const selectAuthState = (state: RootState) => state.auth;
 export const selectAccessToken = (state: RootState) =>
@@ -9,5 +9,7 @@ export const selectIsAuthenticated = (state: RootState) =>
   selectAuthState(state).isAuthenticated;
 export const selectIsAuthLoading = (state: RootState) =>
   selectAuthState(state).isLoading;
+export const selectIsSessionRestoring = (state: RootState) =>
+  selectAuthState(state).isSessionRestoring;
 export const selectCurrentUser = (state: RootState) =>
   selectAuthState(state).user;

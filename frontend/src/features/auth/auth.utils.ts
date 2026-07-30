@@ -1,7 +1,7 @@
-import { ERROR_MESSAGES } from '../../constants/messages';
+import { ERROR_MESSAGES } from "../../constants/messages";
 
 const isRecord = (value: unknown): value is Record<string, unknown> =>
-  typeof value === 'object' && value !== null;
+  typeof value === "object" && value !== null;
 
 const readMessage = (value: unknown): string | null => {
   if (!isRecord(value)) {
@@ -10,7 +10,7 @@ const readMessage = (value: unknown): string | null => {
 
   const message = value.message ?? value._message;
 
-  return typeof message === 'string' ? message : null;
+  return typeof message === "string" ? message : null;
 };
 
 export const getApiErrorMessage = (error: unknown): string => {
