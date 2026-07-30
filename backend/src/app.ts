@@ -3,6 +3,7 @@ import cors from "cors"
 import express from "express"
 import helmet from "helmet"
 
+import { errorMiddleware } from "./middleware/error.middleware";
 
 const app = express()
 
@@ -26,5 +27,6 @@ app.get('/health', (_req, res) => {
     message: 'Server is running.',
   });
 });
+app.use(errorMiddleware)
 
 export default app;
