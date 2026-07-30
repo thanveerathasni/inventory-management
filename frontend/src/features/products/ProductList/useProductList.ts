@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 
 import { getProducts } from "../../../services/api";
 
@@ -11,7 +11,11 @@ const INITIAL_PRODUCT_LIST_STATE: ProductListState = {
   status: PRODUCT_LIST_STATUS.LOADING,
 };
 
-export const useProductList = (): ProductListState => {
+interface UseProductListResult extends ProductListState {
+  readonly removeProduct: (productId: string) => void;
+}
+
+export const useProductList = (): UseProductListResult => {
   const [state, setState] = useState<ProductListState>(
     INITIAL_PRODUCT_LIST_STATE,
   );
@@ -52,5 +56,12 @@ export const useProductList = (): ProductListState => {
     };
   }, []);
 
-  return state;
+  const removeProduct = useCallback((productId: string): void => {
+    setState((current) => ({
+      ...current,
+      products: current.products.filter((product) => product._id !== productId),
+    }));
+  }, []);
+
+  return { ...state, removeProduct };
 };

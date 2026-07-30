@@ -54,3 +54,13 @@ export const updateProduct = async (
 
   return response.data;
 };
+
+export const deleteProduct = async (
+  productId: string,
+): Promise<ApiResponse<undefined>> => {
+  const response = await apiClient.delete<ApiResponse<undefined>>(
+    API_ENDPOINTS.PRODUCTS.BY_ID(productId),
+  );
+
+  return response.data;
+};

@@ -1,0 +1,11 @@
+const PAGE_SIZE_OPTIONS = [10, 25, 50] as const;
+
+export const UI_CONSTANTS = {
+  DEBOUNCE_DELAY_MS: 300,
+  LOW_STOCK_THRESHOLD: 5,
+  PAGINATION: {
+    DEFAULT_PAGE: 1,
+    DEFAULT_PAGE_SIZE: PAGE_SIZE_OPTIONS[0],
+    PAGE_SIZE_OPTIONS,
+  },
+} as const;

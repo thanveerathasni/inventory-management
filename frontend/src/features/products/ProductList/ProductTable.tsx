@@ -5,34 +5,42 @@ import { PRODUCT_LIST_TEXT } from "../product.types";
 import { ProductTableRow } from "./ProductTableRow";
 
 interface ProductTableProps {
+  readonly deletingProductId: string | null;
+  readonly onDelete: (product: Product) => void;
   readonly products: readonly Product[];
 }
 
-export const ProductTable = ({ products }: ProductTableProps) => (
+export const ProductTable = ({
+  deletingProductId,
+  onDelete,
+  products,
+}: ProductTableProps) => (
   <div className="overflow-x-auto rounded-lg border border-slate-200 bg-white">
     <table className="min-w-full text-left text-sm">
       <thead className="bg-slate-100 text-slate-700">
         <tr>
-          <th className="px-4 py-3 font-semibold" scope="col">
-            {PRODUCT_LIST_TEXT.NAME}
-          </th>
-          <th className="px-4 py-3 font-semibold" scope="col">
-            {PRODUCT_LIST_TEXT.CATEGORY}
-          </th>
-          <th className="px-4 py-3 font-semibold" scope="col">
-            {PRODUCT_LIST_TEXT.QUANTITY}
-          </th>
-          <th className="px-4 py-3 font-semibold" scope="col">
-            {PRODUCT_LIST_TEXT.PRICE}
-          </th>
-          <th className="px-4 py-3 font-semibold" scope="col">
-            {PRODUCT_LIST_TEXT.ACTIONS}
-          </th>
+          {[
+            PRODUCT_LIST_TEXT.NAME,
+            PRODUCT_LIST_TEXT.CATEGORY,
+            PRODUCT_LIST_TEXT.QUANTITY,
+            PRODUCT_LIST_TEXT.PRICE,
+            "Status",
+            PRODUCT_LIST_TEXT.ACTIONS,
+          ].map((label) => (
+            <th className="px-4 py-3 font-semibold" key={label} scope="col">
+              {label}
+            </th>
+          ))}
         </tr>
       </thead>
       <tbody>
         {products.map((product) => (
-          <ProductTableRow key={product._id} product={product} />
+          <ProductTableRow
+            isDeleting={deletingProductId === product._id}
+            key={product._id}
+            onDelete={onDelete}
+            product={product}
+          />
         ))}
       </tbody>
     </table>
