@@ -1,12 +1,9 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState } from "react";
 
-import { getProducts } from '../../../services/api';
+import { getProducts } from "../../../services/api";
 
-import { getApiErrorMessage } from '../../auth/auth.utils';
-import {
-  PRODUCT_LIST_STATUS,
-  type ProductListState,
-} from '../product.types';
+import { getApiErrorMessage } from "../../auth/auth.utils";
+import { PRODUCT_LIST_STATUS, type ProductListState } from "../product.types";
 
 const INITIAL_PRODUCT_LIST_STATE: ProductListState = {
   error: null,
@@ -15,7 +12,9 @@ const INITIAL_PRODUCT_LIST_STATE: ProductListState = {
 };
 
 export const useProductList = (): ProductListState => {
-  const [state, setState] = useState<ProductListState>(INITIAL_PRODUCT_LIST_STATE);
+  const [state, setState] = useState<ProductListState>(
+    INITIAL_PRODUCT_LIST_STATE,
+  );
 
   useEffect(() => {
     let isActive = true;

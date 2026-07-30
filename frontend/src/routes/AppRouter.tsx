@@ -4,7 +4,7 @@ import { Navigate, Route, Routes } from "react-router-dom";
 
 import { PROTECTED_ROUTES, PUBLIC_ROUTES } from "../constants/routes";
 import { initializeAuth } from "../features/auth";
-import { ProductListPage } from "../features/products";
+import { CreateProductPage, ProductListPage } from "../features/products";
 import { useAuth } from "../hooks";
 import { DashboardLayout } from "../layouts";
 import { LoginPage } from "../pages/Login";
@@ -39,7 +39,14 @@ export const AppRouter = () => {
       <Route element={<ProtectedRoute />}>
         <Route element={<DashboardLayout />}>
           <Route element={null} path={PROTECTED_ROUTES.DASHBOARD} />
-          <Route element={<ProductListPage />} path={PROTECTED_ROUTES.PRODUCTS} />
+          <Route
+            element={<CreateProductPage />}
+            path={PROTECTED_ROUTES.PRODUCT_CREATE}
+          />
+          <Route
+            element={<ProductListPage />}
+            path={PROTECTED_ROUTES.PRODUCTS}
+          />
         </Route>
       </Route>
     </Routes>

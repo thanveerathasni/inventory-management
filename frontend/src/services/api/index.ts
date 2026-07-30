@@ -7,4 +7,9 @@ export {
   type LoginResponse,
 } from "./auth.api";
 export type { ApiResponse } from "./api.types";
-export { getProducts, type Product } from './product.api';
+export {
+  createProduct,
+  getProducts,
+  type CreateProductRequest,
+  type Product,
+} from "./product.api";

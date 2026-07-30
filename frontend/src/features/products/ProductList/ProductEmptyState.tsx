@@ -1,4 +1,4 @@
-import { PRODUCT_LIST_TEXT } from '../product.types';
+import { PRODUCT_LIST_TEXT } from "../product.types";
 
 export const ProductEmptyState = () => (
   <section className="rounded-lg border border-dashed border-slate-300 bg-white p-8 text-center">

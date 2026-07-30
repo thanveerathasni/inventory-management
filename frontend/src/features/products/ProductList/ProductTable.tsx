@@ -1,8 +1,8 @@
-import type { Product } from '../../../services/api';
+import type { Product } from "../../../services/api";
 
-import { PRODUCT_LIST_TEXT } from '../product.types';
+import { PRODUCT_LIST_TEXT } from "../product.types";
 
-import { ProductTableRow } from './ProductTableRow';
+import { ProductTableRow } from "./ProductTableRow";
 
 interface ProductTableProps {
   readonly products: readonly Product[];

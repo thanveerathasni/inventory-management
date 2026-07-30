@@ -4,15 +4,23 @@ export {
   ProductLoading,
   ProductTable,
   ProductTableRow,
-} from './ProductList';
+} from "./ProductList";
+export {
+  CreateProductForm,
+  CreateProductPage,
+  createProductSchema,
+  toCreateProductRequest,
+  type CreateProductFormValues,
+  type CreateProductSchema,
+} from "./ProductCreate";
 export {
   selectProductListError,
   selectProductListProducts,
   selectProductListStatus,
-} from './product.selectors';
+} from "./product.selectors";
 export {
   PRODUCT_LIST_STATUS,
   PRODUCT_LIST_TEXT,
   type ProductListState,
   type ProductListStatus,
-} from './product.types';
+} from "./product.types";

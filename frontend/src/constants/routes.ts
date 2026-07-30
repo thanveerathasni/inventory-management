@@ -5,6 +5,7 @@ export const PUBLIC_ROUTES = {
 } as const;
 
 export const PROTECTED_ROUTES = {
+  PRODUCT_CREATE: "/products/create",
   DASHBOARD: "/dashboard",
   PRODUCTS: "/products",
 } as const;

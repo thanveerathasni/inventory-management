@@ -1,6 +1,6 @@
-import type { Product } from '../../../services/api';
+import type { Product } from "../../../services/api";
 
-import { PRODUCT_LIST_TEXT } from '../product.types';
+import { PRODUCT_LIST_TEXT } from "../product.types";
 
 interface ProductTableRowProps {
   readonly product: Product;
