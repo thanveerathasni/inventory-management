@@ -2,9 +2,9 @@ import { Router } from 'express';
 
 import { ProductController } from '../controllers/ProductController';
 import { protect } from '../middleware/auth.middleware';
+import { validate } from '../middleware/validate.middleware';
 import { ProductRepository } from '../repositories/ProductRepository';
 import { ProductService } from '../services/ProductService';
-import { validate } from '../middleware/validate.middleware';
 import {
   createProductSchema,
   updateProductSchema,
