@@ -1,12 +1,20 @@
-import { InferSchemaType, model, Schema } from 'mongoose';
+import { model, Schema } from 'mongoose';
 
-const userSchema = new Schema(
+export interface IUser {
+  name: string;
+  email: string;
+  password: string;
+  refreshToken?: string | null;
+}
+
+const userSchema = new Schema<IUser>(
   {
     name: {
       type: String,
       required: true,
       trim: true,
     },
+
     email: {
       type: String,
       required: true,
@@ -14,17 +22,21 @@ const userSchema = new Schema(
       lowercase: true,
       trim: true,
     },
+
     password: {
       type: String,
       required: true,
       minlength: 6,
+    },
+
+    refreshToken: {
+      type: String,
+      default: null,
     },
   },
   {
     timestamps: true,
   }
 );
-
-export type IUser = InferSchemaType<typeof userSchema>;
 
 export const User = model<IUser>('User', userSchema);
