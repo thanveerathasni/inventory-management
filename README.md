@@ -45,7 +45,7 @@ A modern **full-stack Inventory Management System** built with **React, TypeScri
 
 ---
 
-# 🏗 Tech Stack
+# Tech Stack
 
 ## Frontend
 
@@ -103,7 +103,7 @@ inventory-management/
 
 ---
 
-# ⚙️ Installation
+#  Installation
 
 ## Clone the repository
 
