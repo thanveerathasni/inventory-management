@@ -8,9 +8,26 @@ import toast from "react-hot-toast";
 
 import { getApiErrorMessage } from "../../features/auth/auth.utils";
 
+import type { Store } from "@reduxjs/toolkit";
+import type { RootState } from "../../store/store";
+
+let injectedStore: Store<RootState> | null = null;
+
+export const injectStore = (store: Store<RootState>): void => {
+  injectedStore = store;
+};
+
 export const configureApiInterceptors = (client: AxiosInstance): void => {
   client.interceptors.request.use(
-    (config: InternalAxiosRequestConfig): InternalAxiosRequestConfig => config,
+    (config: InternalAxiosRequestConfig): InternalAxiosRequestConfig => {
+      if (injectedStore) {
+        const token = injectedStore.getState().auth.accessToken;
+        if (token) {
+          config.headers.Authorization = `Bearer ${token}`;
+        }
+      }
+      return config;
+    },
     (error: AxiosError): Promise<never> => Promise.reject(error),
   );
   client.interceptors.response.use(

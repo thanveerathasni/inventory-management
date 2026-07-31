@@ -7,8 +7,11 @@ import { Toaster } from "react-hot-toast";
 
 import { ErrorBoundary } from "./components/ErrorBoundary";
 import { AppRouter } from "./routes";
+import { injectStore } from "./services/api/interceptors";
 import { store } from "./store/store";
 import "./styles/index.css";
+
+injectStore(store);
 
 const rootElement = document.getElementById("root");
 
